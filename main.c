@@ -161,5 +161,6 @@ int main(void) {
                 printf("Opção inválida\n\n");
         }
     } while (Menu != 5);
+    
     return 0;
 }

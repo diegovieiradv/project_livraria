@@ -3,6 +3,7 @@
 #include <string.h>
 #define TAMANHO_ACERVO 20
 
+// Estrutura que representa um livro no acervo
 struct Livro {
     int codigo;
     char titulo[50];
@@ -12,6 +13,7 @@ struct Livro {
     char editora[30];
 };
 
+// Ordena o acervo por ano (crescente). Bubble sort simples.
 void bubbleSort(struct Livro acervo[], int totalLivros) {
     for (int i = 0; i < totalLivros - 1; i++) {
         for (int j = 0; j < totalLivros - i - 1; j++) {
@@ -25,10 +27,12 @@ void bubbleSort(struct Livro acervo[], int totalLivros) {
 }
 
 int main(void) {
+    // Acervo com limite fixo de livros (definido por TAMANHO_ACERVO)
     struct Livro acervo[TAMANHO_ACERVO];
     int Menu;
     int totalLivros = 0;
 
+    // Loop principal do menu
     do {
         printf("------------------------- Menu ------------------------------\n\n");
         printf("1 - Cadastrar livros\n");
@@ -38,16 +42,21 @@ int main(void) {
         printf("5 - Sair do programa\n");
         printf("Escolha uma opção:  ");
         scanf("%d", &Menu);
-        getchar();
+        getchar(); // Consome o '\n' deixado pelo scanf
 
+        // Tratamento das opções do menu
         switch (Menu) {
+
             case 1:
+                // Cadastro de um novo livro no acervo
                 if (totalLivros < TAMANHO_ACERVO) {
                     printf("Cadastro do livro %d\n", totalLivros + 1);
+
                     printf("Código: ");
                     scanf("%d", &acervo[totalLivros].codigo);
                     getchar();
 
+                    // Uso de fgets para evitar problemas de buffer
                     printf("Título: ");
                     fgets(acervo[totalLivros].titulo, 50, stdin);
                     acervo[totalLivros].titulo[strcspn(acervo[totalLivros].titulo, "\n")] = '\0';
@@ -73,6 +82,8 @@ int main(void) {
                 } else {
                     printf("Acervo sem espaço! Não é possível cadastrar mais livros.\n\n");
                 }
+
+                // Mostra os livros já cadastrados
                 if (totalLivros == 0) {
                     printf("Nenhum livro cadastrado.\n\n");
                 } else {
@@ -87,6 +98,7 @@ int main(void) {
                 break;
 
             case 2:
+                // Listagem completa do acervo
                 printf("Imprimir todos os livros\n\n");
                 printf("--- Dados dos livros ---\n");
                 for (int i = 0; i < totalLivros; i++) {
@@ -101,8 +113,12 @@ int main(void) {
                 }
                 break;
 
-            case 3:printf("Pesquisar livro por código\n\n");
-                while ( 1 ) {
+            case 3:
+                // Busca linear por código
+                printf("Pesquisar livro por código\n\n");
+
+                // Permite várias pesquisas até o usuário digitar 5
+                while (1) {
                     int codigoPesquisa;
                     int encontrado = 0;
 
@@ -127,6 +143,7 @@ int main(void) {
                             break;
                         }
                     }
+
                     if (!encontrado) {
                         printf("Livro %d não encontrado.\n\n", codigoPesquisa);
                     }
@@ -134,6 +151,7 @@ int main(void) {
                 break;
 
             case 4:
+                // Ordena o acervo e depois imprime os livros já ordenados
                 printf("Ordenando livros por ano de publicação\n\n");
                 bubbleSort(acervo, totalLivros);
 
@@ -151,16 +169,19 @@ int main(void) {
                 break;
 
             case 5:
+                // Encerramento do programa
                 printf("Sair do programa...\n");
                 printf("Te esperamos novamente!\n");
                 exit(0);
-
                 break;
 
             default:
+                // Opção inválida digitada pelo usuário
                 printf("Opção inválida\n\n");
         }
+
     } while (Menu != 5);
-    
+
     return 0;
 }
+

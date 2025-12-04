@@ -13,7 +13,7 @@ struct Livro {
     char editora[30];
 };
 
-// Ordena o acervo por ano (crescente). Bubble sort simples.
+// Ordena o acervo por ano crescente Bubble sort
 void bubbleSort(struct Livro acervo[], int totalLivros) {
     for (int i = 0; i < totalLivros - 1; i++) {
         for (int j = 0; j < totalLivros - i - 1; j++) {
@@ -27,7 +27,7 @@ void bubbleSort(struct Livro acervo[], int totalLivros) {
 }
 
 int main(void) {
-    // Acervo com limite fixo de livros (definido por TAMANHO_ACERVO)
+    // Acervo com limite fixo de 20 livros
     struct Livro acervo[TAMANHO_ACERVO];
     int Menu;
     int totalLivros = 0;
@@ -56,7 +56,7 @@ int main(void) {
                     scanf("%d", &acervo[totalLivros].codigo);
                     getchar();
 
-                    // Uso de fgets para evitar problemas de buffer
+                    // Uso de fgets para evitar problemas de buffer do printf
                     printf("Título: ");
                     fgets(acervo[totalLivros].titulo, 50, stdin);
                     acervo[totalLivros].titulo[strcspn(acervo[totalLivros].titulo, "\n")] = '\0';
@@ -83,7 +83,7 @@ int main(void) {
                     printf("Acervo sem espaço! Não é possível cadastrar mais livros.\n\n");
                 }
 
-                // Mostra os livros já cadastrados
+                // Mostra os livros ja cadastrados
                 if (totalLivros == 0) {
                     printf("Nenhum livro cadastrado.\n\n");
                 } else {
@@ -98,7 +98,7 @@ int main(void) {
                 break;
 
             case 2:
-                // Listagem completa do acervo
+                // Listagem completa de todos os livros no acervo
                 printf("Imprimir todos os livros\n\n");
                 printf("--- Dados dos livros ---\n");
                 for (int i = 0; i < totalLivros; i++) {
@@ -114,10 +114,10 @@ int main(void) {
                 break;
 
             case 3:
-                // Busca linear por código
+                // Busca de um livro por um código
                 printf("Pesquisar livro por código\n\n");
 
-                // Permite várias pesquisas até o usuário digitar 5
+                // Permite varias pesquisas ate o usuario digitar 5
                 while (1) {
                     int codigoPesquisa;
                     int encontrado = 0;
@@ -151,7 +151,7 @@ int main(void) {
                 break;
 
             case 4:
-                // Ordena o acervo e depois imprime os livros já ordenados
+                // Ordena o acervo e depois imprime os livros já ordenados por ano de lançamento
                 printf("Ordenando livros por ano de publicação\n\n");
                 bubbleSort(acervo, totalLivros);
 
